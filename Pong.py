@@ -64,8 +64,6 @@ def ball_restart():
         score_time = 0
 
 
-
-
 # General Setup
 pygame.init()
 clock = pygame.time.Clock()
@@ -91,6 +89,7 @@ ball_speed_y = 5 * random.choice((1, -1))
 player_speed = 0
 opponent_speed = 7
 score_time = 1
+pause = 1
 
 # Text Variables
 player_score = 0
@@ -109,6 +108,8 @@ while run:
                 player_speed -= 7
             if event.key == pygame.K_DOWN:
                 player_speed += 7
+            if event.key == pygame.K_RETURN:
+                pause *= -1
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
                 player_speed += 7
@@ -116,10 +117,11 @@ while run:
                 player_speed -= 7
 
     # Game Logic
-    player_animations()
-    opponent_ai()
-    ball_animations()
-    player.y += player_speed
+    if pause > 0:
+        player_animations()
+        opponent_ai()
+        ball_animations()
+        player.y += player_speed
 
     screen.fill(bg_color)
     pygame.draw.rect(screen, light_grey, player)
