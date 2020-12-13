@@ -133,7 +133,10 @@ while run:
         ball_restart()
 
     player_text = game_font.render(f"{player_score}", False, light_grey)
-    screen.blit(player_text, (screen_width / 2 - 13, screen_height / 2 + 10))
+    if player_score > 9:
+        screen.blit(player_text, (screen_width / 2 - 23, screen_height / 2 + 10))
+    else:
+        screen.blit(player_text, (screen_width / 2 - 13, screen_height / 2 + 10))
     opponent_text = game_font.render(f"{opponent_score}", False, light_grey)
     screen.blit(opponent_text, (screen_width / 2 + 5, screen_height / 2 + 10))
 
