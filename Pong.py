@@ -129,18 +129,21 @@ while run:
             if event.key == pygame.K_DOWN:
                 player_speed -= 7
 
+    screen.fill(bg_color)
+    pygame.draw.rect(screen, light_grey, player)
+    pygame.draw.rect(screen, light_grey, opponent)
+    pygame.draw.ellipse(screen, light_grey, ball)
+    pygame.draw.aaline(screen, light_grey, (screen_width / 2, 0), (screen_width / 2, screen_height))
+
     # Game Logic
     if pause > 0:
         player_animations()
         opponent_ai()
         ball_animations()
         player.y += player_speed
-
-    screen.fill(bg_color)
-    pygame.draw.rect(screen, light_grey, player)
-    pygame.draw.rect(screen, light_grey, opponent)
-    pygame.draw.ellipse(screen, light_grey, ball)
-    pygame.draw.aaline(screen, light_grey, (screen_width / 2, 0), (screen_width / 2, screen_height))
+    else:
+        paused = game_font.render("PAUSED", False, light_grey)
+        screen.blit(paused, (20, 20))
 
     if score_time != 0:
         ball_restart()
